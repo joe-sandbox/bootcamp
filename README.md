@@ -5,7 +5,7 @@ Aqui encontrarás un resumen de los comandos más utilizados durante el bootcamp
 
 - [Comandos Generales](#comandos-generales-ibm-cloud-cli)
 - [Construyendo imagenes](#construyendo-imagenes)
-- [Comandos de Kubernetes](#comandos-kubernetes)
+- [Comandos de Kubernetes](#comandos-de-kubernetes)
 
 ## Comandos Generales - IBM Cloud CLI
 Comandos relacionado al CLI de IBM Cloud
