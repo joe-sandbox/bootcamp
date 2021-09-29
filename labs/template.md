@@ -3,6 +3,7 @@
 poner los objetivos del laboratorio
 ## Lo que necesitarás
 
+## Video a seguir
 ## Pasos a seguir
 
 
