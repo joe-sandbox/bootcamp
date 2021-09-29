@@ -1,4 +1,4 @@
-# TITULO DEL LAB
+# Introducción a la consola de IBM Cloud
 ## Lo que aprenderas de este lab:
 En este lab aprenderás sobre la  experiencia que ofrece la plataforma de IBM Cloud y sus capacidades. Así mismo podrás observar como funciona el modelo de IAM.
 
