@@ -1,6 +1,6 @@
 # Introducción IBM Cloud
 ## Lo que aprenderas de este lab:
-poner los objetivos del laboratorio
+En este laboratorio aprenderas sobre las bases de Docker, como crear un contendedor, descargar una imagen así como su eliminación.
 ## Lo que necesitarás
 - [Docker](https://www.docker.com) instalado.
 ## Video a seguir
