@@ -4,7 +4,8 @@ En este lab aprenderás sobre la  experiencia que ofrece la plataforma de IBM Cl
 
 ## Lo que necesitarás
 - Una cuenta de IBM Cloud.
-
+## Video a seguir
+![Link a box](https://ibm.ent.box.com/file/866835907714)
 ## Pasos a seguir
 ### 1. Ingresa a la [consola](https://cloud.ibm.com) de IBM Cloud 
 En caso de no contar con una cuenta puedes crear una gratuita. Recuerda que existen 3 tipos de cuenta Lite, Pay as you go y Suscripción. 
