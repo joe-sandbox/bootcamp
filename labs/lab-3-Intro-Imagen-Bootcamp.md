@@ -5,7 +5,7 @@ En este laboratorio aprenderas a configurar y utilizar la imagen de docker preca
 - Docker instalado
 - Haber terminado el Lab 2 de Introducción a Docker.
 ## Video a seguir
-
+[Link al video](https://ibm.ent.box.com/file/869516249153)
 ## Pasos a seguir
 ### 1. Abre una terminal (En caso de windows si no cuentas con una consola con Bash te recomiendo uses PowerShell) y ejecuta los siguientes comandos:
 Para windows:
@@ -67,5 +67,7 @@ docker exec -it cnbtools bash
 
 
 ## Conclusiones
-
+Hemos aprendido como utilizamos la imagen de docker para aprovechar un ambiente contenerizado y así mismo partir de un ambiente común.
+Además nos introdujimos al mundo de volumenes y el como nos beneficia.
 ## Links de interes
+[Documentación sobre Volumenes de Docker](https://docs.docker.com/storage/volumes/)
