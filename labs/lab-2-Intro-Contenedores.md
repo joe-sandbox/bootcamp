@@ -4,6 +4,7 @@ En este laboratorio aprenderas sobre las bases de Docker, como crear un contende
 ## Lo que necesitarás
 - [Docker](https://www.docker.com) instalado.
 ## Video a seguir
+[Link a video](https://ibm.ent.box.com/file/869503443926)
 ## Pasos a seguir
 1. Inicie un shell y confirme que Docker está instalado. El número de versión no es particularmente importante.
 ```bash
