@@ -3,16 +3,11 @@
 En este laboratorio aprenderas y desplegaras tu primer aplicación en Openshift, creando el despliegue del aplicativo, el servicio que lo conectará y la ruta que nos dará acceso.
 ## Lo que necesitarás
 - Una ventana de shell con el contenedor con la imagen del [lab 3](https://github.com/joeg1307/bootcamp/blob/main/labs/lab-3-Intro-Imagen-Bootcamp.md) corriendo
-- Tener tu propio namespace dentro del cluster de OpenShift
 - Haber hecho el login en el shell para acceder a OpenShift
 ## Video a seguir
 [Link a video](https://ibm.ent.box.com/file/869503443926)
 ## Pasos a seguir
-1. Nos moveremos de namespace para poder desplegar nuestra primera aplicación.
-```bash
-oc project <namespace>
-```
-2. Descarguemos los archivos necesarios para desplegar nuestra aplicación.
+1. Descarguemos los archivos necesarios para desplegar nuestra aplicación.
 ```bash
 git clone https://github.com/alexvigro92/HOLA-MUNDO-OC.git
 ```
@@ -25,7 +20,7 @@ remote: Compressing objects: 100% (5/5), done.
 remote: Total 5 (delta 0), reused 0 (delta 0), pack-reused 0
 Recibiendo objetos: 100% (5/5), listo.
 ```
-3. Podemos comprobar que todo se haya descargado corriendo el siguiente comando.
+2. Podemos comprobar que todo se haya descargado corriendo el siguiente comando.
 ```bash
 ls HOLA-MUNDO-OC
 ```
@@ -34,15 +29,15 @@ Salida esperada:
 deployment.yml    route.yml    service.yml
 ```
 Debemos ver que tenemos 3 archivos deployment.yml, route.yml y service.yml
-4. Movamos la terminal a la carpeta descargada.
+3. Movamos la terminal a la carpeta descargada.
 ```bash
 cd HOLA-MUNDO-OC/
 ```
-5. Es necesario que modifiquemos unas cosas de los 3 archivos por lo tanto abriremos nuestro IDE VSCode.
+4. Es necesario que modifiquemos unas cosas de los 3 archivos por lo tanto abriremos nuestro IDE VSCode.
 ```bash
 code .
 ```
-6. Primer modificaremos el archivo deployment.yml en donde dice <namespace> pondremos el nombre de nuestro proyecto/namespace.
+5. Primer modificaremos el archivo deployment.yml en donde dice <namespace> pondremos el nombre de nuestro proyecto/namespace.
 ```bash
 namespace: <namespace>
 ```
@@ -82,8 +77,8 @@ spec:
       securityContext: {}
       schedulerName: default-scheduler
 ```
-7. Guardamos nuestro archivo y continuamos con el siguiente.
-8. Ahora editaremos el archivo route.yaml y de igual manera modificaremos el campo donde diga <namespace>.
+6. Guardamos nuestro archivo y continuamos con el siguiente.
+7. Ahora editaremos el archivo route.yaml y de igual manera modificaremos el campo donde diga <namespace>.
 ```bash
 namespace: <namespace>
 ```
@@ -108,8 +103,8 @@ spec:
     targetPort: 8080-tcp
   wildcardPolicy: None
 ```
-9. De nuevo guardamos el archivo y continuamos con el siguiente.
-10. Para finalizar editaremos el archivo service.yaml y de igual manera modificaremos el campo donde diga <namespace>.
+8. De nuevo guardamos el archivo y continuamos con el siguiente.
+9. Para finalizar editaremos el archivo service.yaml y de igual manera modificaremos el campo donde diga <namespace>.
 ```bash
 namespace: <namespace>
 ```
@@ -136,9 +131,9 @@ spec:
   type: ClusterIP
   sessionAffinity: None
 ```
-11. Por ultimo guardamos el archivo.
-12. Ya que modificamos los 3 archivos podemos continuar en la ventana de nuestro shell, a continuación subiremos nuestros archivos de configuración a nuestro cluster para que OpenShift se encargue de hacer el despligue de nuestra aplicación y de hacer las configuraciones necesarias.
-13. El siguiente comando que correremos nos ayudará a hacer el despliegue de nuestro contenedor dentro de un pod.
+10. Por ultimo guardamos el archivo.
+11. Ya que modificamos los 3 archivos podemos continuar en la ventana de nuestro shell, a continuación subiremos nuestros archivos de configuración a nuestro cluster para que OpenShift se encargue de hacer el despligue de nuestra aplicación y de hacer las configuraciones necesarias.
+12. El siguiente comando que correremos nos ayudará a hacer el despliegue de nuestro contenedor dentro de un pod.
 ```bash
 oc create -f deployment.yml
 ```
@@ -165,7 +160,7 @@ NAME                          READY   STATUS    RESTARTS   AGE
 hola-mundo-86d8c64c6b-ps2br   1/1     Running   0          3m
 ```
 Con estó nuestra aplicación se ha desplegado correctamente, lo siguiente que nos toca hacer es un [servicio de OpenShift](https://docs.openshift.com/enterprise/3.0/architecture/core_concepts/pods_and_services.html#services) el cual servirá como un valanceador de cargas interno.
-14. El siguiente comando nos permitirá desplegar el servicio y conectarlo a nuestro despliegue y a su vez a nuestro pod.
+13. El siguiente comando nos permitirá desplegar el servicio y conectarlo a nuestro despliegue y a su vez a nuestro pod.
 ```bash
 oc create -f service.yml
 ```
@@ -183,7 +178,7 @@ NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
 hola-mundo   ClusterIP   172.21.192.227   <none>        8080/TCP   1m
 ```
 Para finalizar debemos de crear la apertura que nos dará acceso a nuestra aplicación desde el exterior de nuestro cluster, a esto lo llamaremos route.
-15. Para crear un route debemos de ejecutar el siguiente comando.
+14. Para crear un route debemos de ejecutar el siguiente comando.
 ```bash
 oc create -f route.yml
 ```
@@ -214,7 +209,7 @@ Podemos probar con algunos paths extras que nos mostraran otras cosas de nuestra
 <url>/hello/es
 ```
 Con esto completamos el despligue de nuestra primera aplicación, ahora procederemos a borrar todo lo que hemos hecho.
-16. Ahora procederemos a borrar el despliegue, el servicio y la ruta. Comenzaremos borrando la ruta con el siguiente comando.
+15. Ahora procederemos a borrar el despliegue, el servicio y la ruta. Comenzaremos borrando la ruta con el siguiente comando.
 ```bash
 oc delete -f route.yml
 ```
@@ -222,7 +217,7 @@ El resultado que esperamos es el siguiente.
 ```bash
 route.route.openshift.io "hola-mundo" deleted
 ```
-17. Ahora procederemos a borrar el servicio.
+16. Ahora procederemos a borrar el servicio.
 ```bash
 oc delete -f service.yml
 ```
@@ -230,7 +225,7 @@ Si todo salió correcto deberías de ver el siguiente mensaje.
 ```bash
 service "hola-mundo" deleted
 ```
-18. Para finalizar borraremos el despliegue.
+17. Para finalizar borraremos el despliegue.
 ```bash
 oc delete -f deployment.yml
 ```
@@ -238,7 +233,7 @@ Con esto estaríamos borrando nuestra aplicación junto con el pod.
 ```bash
 deployment.apps "hola-mundo" deleted
 ```
-19. Para corroborar que todo salio como esperabamos correremos el siguiente comando.
+18. Para corroborar que todo salio como esperabamos correremos el siguiente comando.
 ```bash
 oc get all
 ```
