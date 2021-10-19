@@ -1,6 +1,6 @@
 # Hola Mundo en OpenShift
-## Lo que aprenderas de este lab:
-En este laboratorio aprenderas y desplegaras tu primer aplicación en Openshift, creando el despliegue del aplicativo, el servicio que lo conectará y la ruta que nos dará acceso.
+## Lo que aprenderás de este lab:
+En este laboratorio aprenderás y desplegaras tu primer aplicación en Openshift, creando el despliegue del aplicativo, el servicio que lo conectará y la ruta que nos dará acceso.
 ## Lo que necesitarás
 - Una ventana de shell con el contenedor con la imagen del [lab 3](https://github.com/joeg1307/bootcamp/blob/main/labs/lab-3-Intro-Imagen-Bootcamp.md) corriendo
 - Haber hecho el login en el shell para acceder a OpenShift
@@ -33,7 +33,11 @@ Debemos ver que tenemos 3 archivos deployment.yml, route.yml y service.yml
 ```bash
 cd HOLA-MUNDO-OC/
 ```
-4. Es necesario que modifiquemos unas cosas de los 3 archivos por lo tanto abriremos nuestro IDE VSCode.
+4. Es necesario que modifiquemos unas cosas de los 3 archivos por lo tanto abriremos nuestro IDE VSCode. Debemos de correr el siguiente comando para saber en que proyecto estamos y poder utilizarlo para la edición de los archivos.
+```bash
+oc project
+```
+Despues del comando anterior abrimos VSCode para comenzar a editar los 3 archivos.
 ```bash
 code .
 ```
@@ -82,7 +86,7 @@ spec:
 ```bash
 namespace: <namespace>
 ```
-el cual quedaría por ejemplo.
+el cual quedaría, por ejemplo.
 ```bash
 namespace: bootcamp
 ```
@@ -131,13 +135,13 @@ spec:
   type: ClusterIP
   sessionAffinity: None
 ```
-10. Por ultimo guardamos el archivo.
-11. Ya que modificamos los 3 archivos podemos continuar en la ventana de nuestro shell, a continuación subiremos nuestros archivos de configuración a nuestro cluster para que OpenShift se encargue de hacer el despligue de nuestra aplicación y de hacer las configuraciones necesarias.
+10. Por último guardamos el archivo.
+11. Ya que modificamos los 3 archivos podemos continuar en la ventana de nuestro shell, a continuación, subiremos nuestros archivos de configuración a nuestro clúster para que OpenShift se encargue de hacer el despliegue de nuestra aplicación y de hacer las configuraciones necesarias.
 12. El siguiente comando que correremos nos ayudará a hacer el despliegue de nuestro contenedor dentro de un pod.
 ```bash
 oc create -f deployment.yml
 ```
-Deberíamos recibir el siguiente mensaje comprobando que todo se configuró y se creó nuestro despligue.
+Deberíamos recibir el siguiente mensaje comprobando que todo se configuró y se creó nuestro despliegue.
 ```bash
 deployment.apps/hola-mundo created
 ```
@@ -150,7 +154,7 @@ El resultado debería de ser el siguiente si todo se ejecutó correctamente.
 NAME         READY   UP-TO-DATE   AVAILABLE   AGE
 hola-mundo   1/1     1            1           2m
 ```
-Podemos tambien revisar el estado de nuestro pod para ver si se levantó correctamente con el siguiente comando.
+Podemos también revisar el estado de nuestro pod para ver si se levantó correctamente con el siguiente comando.
 ```bash
 oc get pods
 ```
@@ -159,7 +163,7 @@ Deberíamos de ver que mi pod está en estado **Running**.
 NAME                          READY   STATUS    RESTARTS   AGE
 hola-mundo-86d8c64c6b-ps2br   1/1     Running   0          3m
 ```
-Con estó nuestra aplicación se ha desplegado correctamente, lo siguiente que nos toca hacer es un [servicio de OpenShift](https://docs.openshift.com/enterprise/3.0/architecture/core_concepts/pods_and_services.html#services) el cual servirá como un valanceador de cargas interno.
+Con esto nuestra aplicación se ha desplegado correctamente, lo siguiente que nos toca hacer es un [servicio de OpenShift](https://docs.openshift.com/enterprise/3.0/architecture/core_concepts/pods_and_services.html#services) el cual servirá como un balanceador de cargas interno.
 13. El siguiente comando nos permitirá desplegar el servicio y conectarlo a nuestro despliegue y a su vez a nuestro pod.
 ```bash
 oc create -f service.yml
@@ -177,7 +181,7 @@ Tenemos que ver el siguiente resultado.
 NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
 hola-mundo   ClusterIP   172.21.192.227   <none>        8080/TCP   1m
 ```
-Para finalizar debemos de crear la apertura que nos dará acceso a nuestra aplicación desde el exterior de nuestro cluster, a esto lo llamaremos route.
+Para finalizar debemos de crear la apertura que nos dará acceso a nuestra aplicación desde el exterior de nuestro clúster, a esto lo llamaremos route.
 14. Para crear un route debemos de ejecutar el siguiente comando.
 ```bash
 oc create -f route.yml
@@ -195,7 +199,7 @@ Tenemos que ver el siguiente resultado.
 NAME         HOST/PORT                                                        PATH   SERVICES     PORT       TERMINATION   WILDCARD
 hola-mundo   hola-mundo-bootcamp.garage.us-south.containers.appdomain.cloud          hola-mundo   8080-tcp                 None
 ```
-Al crear nuestro route automaticamente nos está generando el host de nuestra aplicación por lo tanto ahora podemos copiar y pegar el host en nuestro navegador de preferencia y podrémos ver el resultado de nuestro laboratorio.
+Al crear nuestro route automáticamente nos está generando el host de nuestra aplicación por lo tanto ahora podemos copiar y pegar el host en nuestro navegador de preferencia y podremos ver el resultado de nuestro laboratorio.
 En mi caso la ruta es la siguiente 
 ```bash
 hola-mundo-bootcamp.garage.us-south.containers.appdomain.cloud
@@ -208,7 +212,7 @@ Podemos probar con algunos paths extras que nos mostraran otras cosas de nuestra
 <url>/hello/fr
 <url>/hello/es
 ```
-Con esto completamos el despligue de nuestra primera aplicación, ahora procederemos a borrar todo lo que hemos hecho.
+Con esto completamos el despliegue de nuestra primera aplicación, ahora procederemos a borrar todo lo que hemos hecho.
 15. Ahora procederemos a borrar el despliegue, el servicio y la ruta. Comenzaremos borrando la ruta con el siguiente comando.
 ```bash
 oc delete -f route.yml
@@ -233,7 +237,7 @@ Con esto estaríamos borrando nuestra aplicación junto con el pod.
 ```bash
 deployment.apps "hola-mundo" deleted
 ```
-18. Para corroborar que todo salio como esperabamos correremos el siguiente comando.
+18. Para corroborar que todo salió como esperábamos correremos el siguiente comando.
 ```bash
 oc get all
 ```
@@ -241,3 +245,4 @@ El resultado que esperamos ver es el siguiente.
 ```bash
 No resources found in bootcamp namespace.
 ```
+![image](https://user-images.githubusercontent.com/13998697/137974869-758f2bde-30c1-443d-a021-869bf148103f.png)
