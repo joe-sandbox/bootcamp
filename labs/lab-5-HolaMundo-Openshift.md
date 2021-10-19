@@ -245,4 +245,3 @@ El resultado que esperamos ver es el siguiente.
 ```bash
 No resources found in bootcamp namespace.
 ```
-![image](https://user-images.githubusercontent.com/13998697/137974869-758f2bde-30c1-443d-a021-869bf148103f.png)
