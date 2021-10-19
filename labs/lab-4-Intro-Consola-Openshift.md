@@ -70,10 +70,14 @@ Partiendo del panel de la sección anterior. Recuerda que en esta vista de rápi
  2. Gráficas de monitoreo del Pod.
  2. Un menú de opciones para poder operar el `Pod`. Opciones como Eliminar o Editar enlínea el `Pod` (YAML)
 <br> ![stepv2](images/lab-3-Openshift-View-2.png)
-3. Da click en el menú de opciones en al opción de `Terminal`
-4. Da click ahora en la opción de YAML 
+3. Da click en el menú de opciones en al opción de `Terminal`. En esta sección podras utilizar una terminal que te conecte directamente al sistema de archivos del contenedor. <br> ![stepv3](images/lab-3-Openshift-View-3.png)
+4. Da click ahora en la opción de YAML.  <br>![stepv4](images/lab-3-Openshift-View-4.png)
 
 
  ## Conclusiones
-
+Con este laboratorio aprendiste sobre las experiencias que ofrece la consola de Openshift. 
+ - [x] Como acceder desde IBM Cloud a la consola de OpenShift
+ - [x] Cambiar entre vistas de Administrador y Desarrollador
+ - [x] Crear diferentes recursos a través de Operadores y o la opción de agregar recursos. 
+ - [x] Revisar diferentes componentes sus respectivos YAML y Logs
 ## Links de interes
