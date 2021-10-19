@@ -5,7 +5,7 @@ En este laboratorio aprenderas y desplegaras tu primer aplicación en Openshift,
 - Una ventana de shell con el contenedor con la imagen del [lab 3](https://github.com/joeg1307/bootcamp/blob/main/labs/lab-3-Intro-Imagen-Bootcamp.md) corriendo
 - Haber hecho el login en el shell para acceder a OpenShift
 ## Video a seguir
-[Link a video](https://ibm.ent.box.com/file/869503443926)
+[Link a video](https://ibm.box.com/s/gy1ylcxkgygboxhrncvcc01k0cdjn1ip)
 ## Pasos a seguir
 1. Descarguemos los archivos necesarios para desplegar nuestra aplicación.
 ```bash
