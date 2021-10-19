@@ -39,12 +39,41 @@ Tareas como instalación de operadores, almancemanmiento, manejo de usuarios, et
 
 ### 3- Creando recursos
 Dentro de OpenShift se pueden crear diferentes tipos de recursos ya sean de Kuberentes o de OpenShift. 
-Una forma de crearlos es a través del `icono de más` en la parte superior e ingresando en YAML del recurso a crear.
+Una forma de crearlos es a través del icono de `+` en la parte superior e ingresando en YAML del recurso a crear.
 Otra forma es través de la línea de comandos, la cual puedes utilizar y autenticarte a través del comando que muestra en la consola en la sección de tu usuario.
 Desde la versión 4 de OpenShift se introdujeron los `Operators` u operadores en español. Prácticamente los operadores nos permiten crear Operadores, los cuales
 funcionan como plantillas, para crear instancias dentro del cluster. Muy similar al catálogo de IBM Cloud que vimos en el laboratorio anterior. 
 
 Vamos a crear un recurso. 
-## Conclusiones
+1. Vamos a la vista de desarrollador <br>
+![step1](images/lab-3-Openshift-Create-1.png)
+2. Damos click en `+Add`.
+ <br> ![step2](images/lab-3-Openshift-Create-2.png)
+3. Asegurate que estas en el proyecto `default` y luego da click en `Catalog`.
+ <br> ![step3](images/lab-3-Openshift-Create-3.png)
+4. En este catálogo encontrarás una gran variedad de recursos para crear dentro de tu cluster. Da click en `Apache HTTP Server`con la etiqueta `Template`.
+ <br> ![step4](images/lab-3-Openshift-Create-4.png)
+5. Da click en `Instantiate Template` <br> ![step5](images/lab-3-Openshift-Create-5.png)
+6. En esta vista podrás parametrizar la creación de la instancia por el momento deja todo como esta y luego da click en `Create` <br> ![step6](images/lab-3-Openshift-Create-6.png)
+7. Notarás que te redireccionará automáticamente a la vista de topología en ella podras observar que se ha creato un nuevo recurso que corresponde a la instancia que acabas de solicitar a OpenShift que la cree.  Haz un click sobre ese icono para que muestre más información contextual del despliegue y los recursos de OpenShift que fueron creados.<br> ![step7](images/lab-3-Openshift-Create-7.png)
+8. En este nuevo panel podrás observar que OpenShift ha creado tanto el `pod`, `build`, `servicio` y una `ruta` para acceder a ella. <br> ![step8](images/lab-3-Openshift-Create-8.png)
+9. Por último da click en la ruta o tambien puede hacer en el icono de enlace externo desde la vista de topología. <br> ![step9](images/lab-3-Openshift-Create-9.png)
+<br> Felicidades! Haz creado un primer recurso en OpenShift, se debería ver algo como se ve en la siguiente imagen.<br> ![step10](images/lab-3-Openshift-Create-10.png)
+
+### 4- Revisar diferentes componentes sus respectivos YAML y Logs
+Partiendo del panel de la sección anterior. Recuerda que en esta vista de rápido acceso puedes acceder a los recursos correspondientes a este despliegue.  
+
+1. Da click en el nombre del `pod` <br> ![stepv1](images/lab-3-Openshift-View-1.png)
+2. En esta vista del pod, podrás observar lo siguiente:
+ 2. El estatus actual del Pod
+ 2. Un menú de opciones para inspeccionar más a detalle el `Pod`
+ 2. Gráficas de monitoreo del Pod.
+ 2. Un menú de opciones para poder operar el `Pod`. Opciones como Eliminar o Editar enlínea el `Pod` (YAML)
+<br> ![stepv2](images/lab-3-Openshift-View-2.png)
+3. Da click en el menú de opciones en al opción de `Terminal`
+4. Da click ahora en la opción de YAML 
+
+
+ ## Conclusiones
 
 ## Links de interes
