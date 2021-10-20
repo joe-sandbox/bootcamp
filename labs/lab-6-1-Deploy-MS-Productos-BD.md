@@ -581,7 +581,7 @@ catalog-lightblue-service           NodePort    <ip-del-cluser>   <none>        
 mysql-lightblue-service             NodePort    <ip-del-cluser>   <none>        3306:30006/TCP   3h35m
 ```
 Ahora correremos el siguiente comando para exponer ese servicio en especifico.
-``bash
+```bash
 oc expose service <nombre-del-servicio>
 ```
 Obtendremos una respuesta como la siguiente.
@@ -611,9 +611,13 @@ Esto nos indica que nuestro microservicio está funcionando bien y tenemos la co
 
 
 ### 9. Borrar la ruta - (Terminal 1)
-Ahora necesitamos borrar la ruta para que el flujo que venga desde afuera del clúster no tenga acceso directo a nuestro microservicio y con eso a nuestra base de datos, por lo tanto, necesitamos correr el siguiente comando. Recuerden sustituir `<nombre-del-servicio>` por el nombre real de su servicio.
+Ahora necesitamos borrar la ruta para que el flujo que venga desde afuera del clúster no tenga acceso directo a nuestro microservicio y con eso a nuestra base de datos, por lo tanto, necesitamos correr el siguiente comando. Recuerden sustituir `<nombre-de-la-ruta>` por el nombre real de su ruta.
 ```bash
-oc delete service <nombre-del-servicio>
+oc delete route <nombre-de-la-ruta>
+```
+Por ejemplo 
+```bash
+oc delete route catalog-lightblue-service
 ```
 De esta manera estaríamos borrando la ruta por lo tanto si intentamos volver a pedir información con el `curl` de arriba nos arrojaría que no existe la URL.
 
