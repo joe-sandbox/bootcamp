@@ -11,7 +11,7 @@ En este laboratorio aprenderás y desplegaras tu primer Microservicio en Openshi
 ## Desplegar la base de datos en el cluster
 
 ## Video a seguir
-[Link a video](https://ibm.ent.box.com/file/869503443926)
+[Link a video](https://ibm.box.com/s/gyqxyq828i6osi7uj1lqr5x8lc76ymdp)
 ## Pasos a seguir
 
 ## He salido del contenedor como puedo volver a entrar? 
@@ -342,7 +342,7 @@ exit
 Una vez que tenemos la base de datos en el clúster y tiene los datos almacenados, podemos comenzar con la siguiente etapa que es desplegar nuestro microservicio y después conectar la base de datos.
 
 ##### Video a seguir
-[Link a video](https://ibm.ent.box.com/file/869503443926)
+[Link a video](https://ibm.box.com/s/qhdfg9qeslp8wtc4pwr4cw3vs9osj2sw)
 
 
 ### 1. Movernos de carpeta - (Terminal 1 y Terminal 2)
