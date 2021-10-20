@@ -373,7 +373,7 @@ Total time: 54.819 secs
 ```
 Ahora construiremos el archivo de docker y de igual manera obtendremos el mismo mensaje como resultado. 
 ```bash
-./gradlew build -x test
+./gradlew docker
 ```
 Resultado esperado.
 ```bash
