@@ -9,7 +9,7 @@ Con este laboratorio aprenderás como crear una función y acceder a ella median
   - [ ] Una cuenta de IBM Cloud
   - [ ] Una terminal abierta
 ## Video a seguir
-[Link a video](https://ibm.box.com/s/gy1ylcxkgygboxhrncvcc01k0cdjn1ip)
+[Link a video](https://ibm.box.com/s/nni9bbk4arqtqglg41iq41ionbjt9dqs)
 ## Pasos a seguir
 
 ### 1- Dentro de IBM Cloud 
