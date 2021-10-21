@@ -45,7 +45,7 @@ oc project default
 ```
 
 ### 3. Configurar login del CR en Docker - (Terminal 2)
-El siguiente paso deberás crear un namespace en la UI de IBM Cloud dirigete al minuto ... del video para saber como hacer esta parte. 
+El siguiente paso deberás crear un namespace en la UI de IBM Cloud dirigete al minuto 3:10 del video para saber como hacer esta parte. 
 Antes de ejecutar el comando asegúrate de abrir una nueva terminal de shell en tu computadora.
 ```bash
 docker login -u iamapikey -p <apikey> us.icr.io/<namespace con nuestras iniciales>
