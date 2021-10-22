@@ -572,10 +572,10 @@ Ahora que tenemos nuestro microservicio desplegado en OpenShift necesitamos expo
 **Con el siguiente comando permitimos el trafico de afuera del clúster a nuestro microservicio** por lo tanto será necesario que después de hacer la prueba borremos la ruta para que de nuevo solo sea accesible dentro del clúster. 
 Primero debemos de encontrar el nombre de nuestro servicio y para eso usaremos el siguiente comando.
 ```bash
-
+oc get services
 ```
 El cual nos arrojará los servicios dentro de nuestro proyecto. Debemos de copiar el nombre de nuestro servicio de catalog `catalog-lightblue-service`.
-``bash
+```bash
 NAME                                TYPE        CLUSTER-IP        EXTERNAL-IP   PORT(S)          AGE
 catalog-lightblue-service           NodePort    <ip-del-cluser>   <none>        8081:30111/TCP   58m
 mysql-lightblue-service             NodePort    <ip-del-cluser>   <none>        3306:30006/TCP   3h35m
