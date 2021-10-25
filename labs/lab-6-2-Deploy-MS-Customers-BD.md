@@ -1,4 +1,4 @@
-# Lab 2 - Despliegue del Microservicio de Customer y creación de Base de Datos Cloudant
+# Lab 2 - Despliegue del Microservicio de Customer y creación de Base de Datos
 
 ## Lo que aprenderas de este lab:
 
@@ -7,17 +7,16 @@ En este laboratorio aprenderas y desplegaras un Microservicio en Openshift unien
 ## Lo que necesitarás
 
 - Una ventana de shell con el contenedor con la imagen del [lab 3](https://github.com/joeg1307/bootcamp/blob/main/labs/lab-3-Intro-Imagen-Bootcamp.md) corriendo
-  
+
 - Tener tu propio namespace dentro del cluster de OpenShift
-  
+
 - Tener el token de login para acceder a OpenShift desde el shell
-  
+
 - Tener las credenciales de IBM Cloud para hacer login desde el shell
-  
+
 - Tener un servicio de CR (Container Registry) en IBM Cloud
-  
+
 - Tener un ApiKey para hacer login desde Docker al CR (Container Registry)
-  
 
 ​
 
@@ -41,10 +40,10 @@ docker start -i cnbtools
 
 ### 1. Configura la terminal de IBM Cloud CLI - (Terminal 1)
 
-Antes de ejecutar el comando asegurate de cambiar los valores `&lt;usuario&gt;`y `&lt;password&gt;`por tu usuario y contraseña de IBM Cloud.
+Antes de ejecutar el comando asegurate de cambiar los valores `<usuario>`y `<password>`por tu usuario y contraseña de IBM Cloud.
 
 ```bash
-ibmcloud login -u &lt;usuario&gt; -p &lt;password&gt; -r us-south
+ibmcloud login -u <usuario> -p <password> -r us-south
 ```
 
 Correremos el siguiente comando para saber a que grupo de recursos nos dirigiremos.
@@ -66,13 +65,13 @@ ibmcloud target -g default
 Antes de ejecutar el comando asegurate obtener el token desde la interfaz de usuario de openshift.
 
 ```bash
-oc login --token=&lt;token&gt; --server=&lt;server&gt;
+oc login --token=<token> --server=<server>
 ```
 
 Nos movemos a nuestro proyecto.
 
 ```bash
-oc login --token=&lt;token&gt; --server=&lt;server&gt;
+oc login --token=<token> --server=<server>
 ```
 
 ​
@@ -86,10 +85,10 @@ oc login --token=&lt;token&gt; --server=&lt;server&gt;
 Antes de ejecutar el comando asegurate de abrir una nueva terminal de shell en tu computadora.
 
 ```bash
-docker login -u iamapikey -p &lt;apikey&gt; us.icr.io/&lt;namespace con nuestras iniciales&gt;
+docker login -u iamapikey -p <apikey> us.icr.io/<namespace con nuestras iniciales>
 ```
 
-La respuesta que esperamos despues de correr el comando anterior es
+La respuesta que esperamos despues de correr el comando anterior es 
 
 ```bash
 WARNING! Using --password via the CLI is insecure. Use --password-stdin.
@@ -133,7 +132,7 @@ cd LightBlueCompute
 
 ### 5. Crear base de datos de Cloudant - (Terminal 1)
 
-Ahora deberemos crear una base de datos para poder conectarla a nuestro microservicio. Antes, revisaremos las instancias que tenemos creadas en nuestra cuenta, esto simplemente lo haremos para saber que existe un comando para mostrar los recursos que tenemos en la nube.
+Ahora deberemos crear una base de datos para poder conectarla a nuestro microservicio. Antes, revisaremos las instancias que tenemos creadas en nuestra cuenta, esto simplemente lo haremos para saber que existe un comando para mostrar los recursos que tenemos en la nube. 
 
 ```bash
 ibmcloud resource service-instances
@@ -142,7 +141,7 @@ ibmcloud resource service-instances
 Despues de ejecutar este comando podríamos recibir varias respuestas entre ellas podríamos recibir la lista de los recursos por ejemplo:
 
 ```bash
-Retrieving instances with type service_instance in all resource groups in all locations under account &lt;cuenta-ibm-cloud&gt;&#39;s Account as &lt;nuesto-usuario&gt;...
+Retrieving instances with type service_instance in all resource groups in all locations under account <cuenta-ibm-cloud>'s Account as <nuesto-usuario>...
 
 OK
 
@@ -153,16 +152,16 @@ Cloudant-db                                          us-south   active   service
 
 El paso anterior no es necesario para crear la instancia de base de datos, simplemente es ilustrativo para mostrar las instancias de servicios en nuestra cuenta de cloud.
 
-El siguiente comando nos servirá para crear nuestra base de datos en la nube, necesitamos modificar nuestras `&lt;iniciales&gt;` en el comando.
+El siguiente comando nos servirá para crear nuestra base de datos en la nube, necesitamos modificar nuestras `<iniciales>` en el comando.
 
 ```bash
-ibmcloud resource service-instance-create cloudantdb-&lt;iniciales&gt; cloudantnosqldb Standard us-south -p &#39;{&quot;legacyCredentials&quot;: true}&#39;
+ibmcloud resource service-instance-create cloudantdb-<iniciales> cloudantnosqldb Standard us-south -p '{"legacyCredentials": true}'
 ```
 
 El resultado que esperamos obtener de ese comando es el siguiente.
 
 ```bash
-Creating service instance cloudantdb-&lt;iniciales&gt; in resource group Default of account IBM as &lt;usuario&gt;...
+Creating service instance cloudantdb-<iniciales> in resource group Default of account IBM as <usuario>...
 
 OK
 
@@ -170,11 +169,11 @@ Service instance cloudantdb was created.
 
 ​
 
-Name:             cloudantdb-&lt;iniciales&gt;
+Name:             cloudantdb-<iniciales>
 
-ID:               crn:v1:bluemix:public:cloudantnosqldb:us-south:a/&lt;id&gt;:&lt;guid&gt;::
+ID:               crn:v1:bluemix:public:cloudantnosqldb:us-south:a/<id>:<guid>::
 
-GUID:             &lt;guid&gt;
+GUID:             <guid>
 
 Location:         us-south
 
@@ -209,16 +208,16 @@ Despues de obtener ese resultado basicamente tendríamos creada nuestra instanci
 
 Despues de haber creado la base de datos necesitamos asignarle credenciales de tal manera que podamos vincularlas con el cluster y asi poder tener la conexión con nuestro microservicio.
 
-El comando para crear las crendenciales es el siguiente, recuerda cambiar el nombre de la instacia modificando tus `&lt;iniciales&gt;`:
+El comando para crear las crendenciales es el siguiente, recuerda cambiar el nombre de la instacia modificando tus `<iniciales>`:
 
 ```bash
-ibmcloud resource service-key-create cloudant-creds --instance-name cloudantdb-&lt;iniciales&gt; 
+ibmcloud resource service-key-create cloudant-creds --instance-name cloudantdb-<iniciales> 
 ```
 
 Si recibimos algun error por ejemplo el siguiente, puede ser porque aun se está creando la base de datos, debemos esperar 30 segundos y volver a internar el comando.
 
 ```Bash
-Creating service key of service instance cloudantdb-mavg under account &lt;cuenta&gt;&#39;s Account as &lt;usuario&gt;...
+Creating service key of service instance cloudantdb-mavg under account <cuenta>'s Account as <usuario>...
 
 FAILED
 
@@ -228,17 +227,17 @@ Error response from server. Status code: 400; description: 400 The resource inst
 El resultado que esperamos es el resumen de las credenciales creadas por IBM Cloud para nuestra instancia de Cloudant.
 
 ```Bash
-Creating service key of service instance cloudantdb-&lt;iniciales&gt; under account IBM as &lt;cuenta&gt;...
+Creating service key of service instance cloudantdb-<iniciales> under account IBM as <cuenta>...
 
 OK
 
-Service key crn:v1:bluemix:public:cloudantnosqldb:us-south:a/&lt;id&gt;:&lt;id&gt;:resource-key:&lt;resource-key&gt; was created.
+Service key crn:v1:bluemix:public:cloudantnosqldb:us-south:a/<id>:<id>:resource-key:<resource-key> was created.
 
 ​
 
 Name:          cloudant-creds
 
-ID:            crn:v1:bluemix:public:cloudantnosqldb:us-south:a/&lt;id&gt;:&lt;id&gt;:resource-key:&lt;resource-key&gt;
+ID:            crn:v1:bluemix:public:cloudantnosqldb:us-south:a/<id>:<id>:resource-key:<resource-key>
 
 Created At:    Thu Oct 14 16:03:20 UTC 2021
 
@@ -246,33 +245,33 @@ State:         active
 
 Credentials:
 
-               apikey:                   &lt;api_key&gt;
+               apikey:                   <api_key>
 
-               host:                     &lt;host&gt;.cloudantnosqldb.appdomain.cloud
+               host:                     <host>.cloudantnosqldb.appdomain.cloud
 
-               iam_apikey_description:   Auto-generated for key &lt;id&gt;
+               iam_apikey_description:   Auto-generated for key <id>
 
                iam_apikey_name:          cloudant-creds
 
                iam_role_crn:             crn:v1:bluemix:public:iam::::serviceRole:Writer
 
-               iam_serviceid_crn:        crn:v1:bluemix:public:iam-identity::a/&lt;id&gt;::serviceid:ServiceId-&lt;service-id&gt;
+               iam_serviceid_crn:        crn:v1:bluemix:public:iam-identity::a/<id>::serviceid:ServiceId-<service-id>
 
-               password:                 &lt;password&gt;
+               password:                 <password>
 
                port:                     443
 
-               url:                      https://&lt;user-name&gt;:&lt;password&gt;@&lt;host&gt;.cloudantnosqldb.appdomain.cloud
+               url:                      https://<user-name>:<password>@<host>.cloudantnosqldb.appdomain.cloud
 
-               username:                 &lt;user-name&gt;
+               username:                 <user-name>
 
 ​
 ```
 
-Ahora que tenemos las credenciales creadas podemos vincular la base de datos con el cluster de Openshift, el siguiente comando nos ayuda a conectar las credenciales con el cluster para poder acceder a la base de datos, recordemos cambiar `&lt;nombre-cluster&gt;`, `&lt;proyecto-openshift&gt;` e `&lt;iniciales&gt;` en el comando.
+Ahora que tenemos las credenciales creadas podemos vincular la base de datos con el cluster de Openshift, el siguiente comando nos ayuda a conectar las credenciales con el cluster para poder acceder a la base de datos, recordemos cambiar `<nombre-cluster>`, `<proyecto-openshift>` e `<iniciales>` en el comando.
 
 ```bash
-ibmcloud oc cluster service bind --cluster &lt;nombre-cluster&gt; --namespace &lt;proyecto-openshift&gt; --service cloudantdb-&lt;iniciales&gt;
+ibmcloud oc cluster service bind --cluster <nombre-cluster> --namespace <proyecto-openshift> --service cloudantdb-<iniciales>
 ```
 
 El resultado que esperamos obtener es el siguiente, que nos indicará que las credenciales fueron vinculadas con el cluster.
@@ -284,9 +283,9 @@ OK
 
 ​
 
-Namespace:     &lt;proyecto-openshift&gt;
+Namespace:     <proyecto-openshift>
 
-Secret Name:   binding-cloudantdb-&lt;iniciales&gt;
+Secret Name:   binding-cloudantdb-<iniciales>
 ```
 
 Si volvieramos a necesitar las credenciales de nuestro servicio de Cloudant, podemos ejecutar el siguiente comando.
@@ -298,13 +297,13 @@ Si volvieramos a necesitar las credenciales de nuestro servicio de Cloudant, pod
 El resultado sería las credenciales de nuestro servicio
 
 ```Bash
-Retrieving service key cloudant-creds in resource group &lt;grupo-de-recursos&gt; under account &lt;cuenta&gt;&#39;s Account as &lt;usuario&gt;...
+Retrieving service key cloudant-creds in resource group <grupo-de-recursos> under account <cuenta>'s Account as <usuario>...
 
 ​
 
 Name:          cloudant-creds
 
-ID:            crn:v1:bluemix:public:cloudantnosqldb:us-south:a/&lt;id&gt;:&lt;id&gt;:resource-key:&lt;resource-key&gt;
+ID:            crn:v1:bluemix:public:cloudantnosqldb:us-south:a/<id>:<id>:resource-key:<resource-key>
 
 Created At:    Thu Oct 14 16:03:20 UTC 2021
 
@@ -312,25 +311,25 @@ State:         active
 
 Credentials:
 
- apikey:                   &lt;api_key&gt;
+ apikey:                   <api_key>
 
- host:                     &lt;host&gt;.cloudantnosqldb.appdomain.cloud
+ host:                     <host>.cloudantnosqldb.appdomain.cloud
 
- iam_apikey_description:   Auto-generated for key &lt;id&gt;
+ iam_apikey_description:   Auto-generated for key <id>
 
  iam_apikey_name:          cloudant-creds
 
  iam_role_crn:             crn:v1:bluemix:public:iam::::serviceRole:Writer
 
- iam_serviceid_crn:        crn:v1:bluemix:public:iam-identity::a/&lt;id&gt;::serviceid:ServiceId-&lt;service-id&gt;
+ iam_serviceid_crn:        crn:v1:bluemix:public:iam-identity::a/<id>::serviceid:ServiceId-<service-id>
 
- password:                 &lt;password&gt;
+ password:                 <password>
 
  port:                     443
 
- url:                      https://&lt;user-name&gt;:&lt;password&gt;@&lt;host&gt;.cloudantnosqldb.appdomain.cloud
+ url:                      https://<user-name>:<password>@<host>.cloudantnosqldb.appdomain.cloud
 
- username:                 &lt;user-name&gt;
+ username:                 <user-name>
 
 ​
 ```
@@ -400,7 +399,7 @@ BUILD SUCCESSFUL
 Total time: 27.077 secs
 ```
 
-Ahora construiremos el archivo de docker y de igual manera obtendremos el mismo mensaje como resultado.
+Ahora construiremos el archivo de docker y de igual manera obtendremos el mismo mensaje como resultado. 
 
 ```bash
 ./gradlew docker
@@ -425,10 +424,10 @@ cd docker
 ```
 
 Ahora construiremos la imagen de nuestro contenedor y la subiremos a nuestro repositorio de CR (Container Registry).
-Recuerden debemos modificar el `&lt;namespace&gt;` y ponerle nuestras iniciales a nuestro repo `&lt;iniciales&gt;` y no olvidemos incluir el punto del final.
+Recuerden debemos modificar el `<namespace>` y ponerle nuestras iniciales a nuestro repo `<iniciales>` y no olvidemos incluir el punto del final.
 
 ```bash
-docker build -t us.icr.io/&lt;namespace&gt;/customer-&lt;iniciales&gt; .
+docker build -t us.icr.io/<namespace>/customer-<iniciales> .
 ```
 
 El comando va a tardar aproximadamente 1 minuto en ejecutarse, prácticamente estamos construyendo nuestra imagen de docker y poniéndole un tag que haga referencia a nuestro repositorio de imágenes en Container Registry.
@@ -436,25 +435,25 @@ El resultado que debemos obtener es el siguiente (pueden variar varias líneas p
 
 ```bash
 [+] Building 8.4s (11/11) FINISHED                                                                         
- =&gt; [internal] load build definition from Dockerfile                                                  0.0s
- =&gt; =&gt; transferring dockerfile: 247B                                                                  0.0s
- =&gt; [internal] load .dockerignore                                                                     0.0s
- =&gt; =&gt; transferring context: 2B                                                                       0.0s
- =&gt; [internal] load metadata for docker.io/library/openjdk:8-jre-alpine                               3.2s
- =&gt; [auth] library/openjdk:pull token for registry-1.docker.io                                        0.0s
- =&gt; CACHED [1/5] FROM docker.io/library/openjdk:8-jre-alpine@sha256:f362b165b870ef129cbe730f29065ff3  0.0s
- =&gt; [internal] load build context                                                                     0.6s
- =&gt; =&gt; transferring context: 16.37MB                                                                  0.6s
- =&gt; [2/5] ADD app.jar app.jar                                                                         0.1s
- =&gt; [3/5] RUN apk --no-cache update && apk add jq bash bc                                             3.3s
- =&gt; [4/5] RUN bash -c &#39;touch /app.jar&#39;                                                                0.3s
- =&gt; [5/5] COPY startup.sh startup.sh                                                                  0.0s 
- =&gt; exporting to image                                                                                0.6s 
- =&gt; =&gt; exporting layers                                                                               0.6s 
- =&gt; =&gt; writing image sha256:675b9d9e2ace157faff5ebafb3effa65de62a529634bf208f40846279d2aa8f2          0.0s 
- =&gt; =&gt; naming to us.icr.io/cnb-bootcamp/customer-alma                                                 0.0s 
+ => [internal] load build definition from Dockerfile                                                  0.0s
+ => => transferring dockerfile: 247B                                                                  0.0s
+ => [internal] load .dockerignore                                                                     0.0s
+ => => transferring context: 2B                                                                       0.0s
+ => [internal] load metadata for docker.io/library/openjdk:8-jre-alpine                               3.2s
+ => [auth] library/openjdk:pull token for registry-1.docker.io                                        0.0s
+ => CACHED [1/5] FROM docker.io/library/openjdk:8-jre-alpine@sha256:f362b165b870ef129cbe730f29065ff3  0.0s
+ => [internal] load build context                                                                     0.6s
+ => => transferring context: 16.37MB                                                                  0.6s
+ => [2/5] ADD app.jar app.jar                                                                         0.1s
+ => [3/5] RUN apk --no-cache update && apk add jq bash bc                                             3.3s
+ => [4/5] RUN bash -c 'touch /app.jar'                                                                0.3s
+ => [5/5] COPY startup.sh startup.sh                                                                  0.0s 
+ => exporting to image                                                                                0.6s 
+ => => exporting layers                                                                               0.6s 
+ => => writing image sha256:675b9d9e2ace157faff5ebafb3effa65de62a529634bf208f40846279d2aa8f2          0.0s 
+ => => naming to us.icr.io/cnb-bootcamp/customer-alma                                                 0.0s 
 
-Use &#39;docker scan&#39; to run Snyk tests against images to find vulnerabilities and learn how to fix them
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
 ```
 
 ```bash
@@ -465,20 +464,20 @@ Y deberíamos de poder ver la imagen que acabamos de construir (de no ser el cas
 
 ```bash
 REPOSITORY                                          TAG            IMAGE ID       CREATED         SIZE
-us.icr.io/&lt;namespace&gt;/customer-&lt;iniciales&gt;           latest         a8e46ce7c4ba   2 minutes ago   448MB
+us.icr.io/<namespace>/customer-<iniciales>           latest         a8e46ce7c4ba   2 minutes ago   448MB
 ```
 
-Una vez que estamos seguros de que mi imagen se construyó correctamente debemos subir la imagen a nuestro CR (Container Registry) por lo tanto corremos el siguiente comando, recordemos modificar los campos de `&lt;namespace&gt;` e `&lt;iniciales&gt;`.
+Una vez que estamos seguros de que mi imagen se construyó correctamente debemos subir la imagen a nuestro CR (Container Registry) por lo tanto corremos el siguiente comando, recordemos modificar los campos de `<namespace>` e `<iniciales>`.
 
 ```bash
-docker push us.icr.io/&lt;namespace&gt;/customer-&lt;iniciales&gt;
+docker push us.icr.io/<namespace>/customer-<iniciales>
 ```
 
 Debemos recibir el siguiente resultado que nos indica que se subió correctamente la imagen a nuestro repositorio.
 
 ```bash
 Using default tag: latest
-The push refers to repository [us.icr.io/&lt;namespace&gt;/customer-&lt;iniciales&gt;
+The push refers to repository [us.icr.io/<namespace>/customer-<iniciales>
 1d004f8992a3: Pushed
 b5dd8d049af1: Pushed
 aad17c1cbde0: Pushed
@@ -492,40 +491,40 @@ latest: digest: sha256:cee5d20c9ca894d353d19c156d5774a39c4af4235316fb1346bd2dc86
 ### 10. Imagen subida a CR - (Terminal 1)
 
 Corroboremos que la imagen se subió correctamente a nuestro Container Registry.
-Debemos modificar el `&lt;namespace&gt;` y ponerle nuestras iniciales a nuestro repo `&lt;iniciales&gt;` y no olvidemos incluir el punto del final.
+Debemos modificar el `<namespace>` y ponerle nuestras iniciales a nuestro repo `<iniciales>` y no olvidemos incluir el punto del final.
 
 ```bash
-ic cr image-inspect us.icr.io/&lt;namespace&gt;/customer-&lt;iniciales&gt;:latest
+ic cr image-inspect us.icr.io/<namespace>/customer-<iniciales>:latest
 ```
 
 Este comando nos permite pedirle información a nuestro CR sobre la imagen que acabamos de subir deberíamos recibir algo por el estilo.
 
 ```bash
-Inspecting image &#39;us.icr.io/&lt;namespace&gt;/customer-&lt;iniciales&gt;:latest&#39;...
+Inspecting image 'us.icr.io/<namespace>/customer-<iniciales>:latest'...
 
 {
-    &quot;Id&quot;: &quot;sha256:b09d36ec122b4fffd1fce55f7558318071f62e594bb619e318f2e06fc3a9ad0c&quot;,    
-    &quot;Parent&quot;: &quot;&quot;,
-    &quot;Comment&quot;: &quot;&quot;,
-    &quot;Created&quot;: &quot;2021-10-14T17:20:25.7806097Z&quot;,
-    &quot;Container&quot;: &quot;&quot;,
-    &quot;ContainerConfig&quot;: {},
-    &quot;DockerVersion&quot;: &quot;&quot;,
-    &quot;Author&quot;: &quot;&quot;,
-    &quot;Config&quot;: {},
-    &quot;Architecture&quot;: &quot;amd64&quot;,
-    &quot;Os&quot;: &quot;linux&quot;,
-    &quot;Size&quot;: 154790406,
-    &quot;VirtualSize&quot;: 154790406,
-    &quot;RootFS&quot;: {
-        &quot;Type&quot;: &quot;layers&quot;,
-        &quot;Layers&quot;: [
-            &quot;sha256:f1b5933fe4b5f49bbe8258745cf396afe07e625bdab3168e364daf7c956b6b81&quot;,
+    "Id": "sha256:b09d36ec122b4fffd1fce55f7558318071f62e594bb619e318f2e06fc3a9ad0c",    
+    "Parent": "",
+    "Comment": "",
+    "Created": "2021-10-14T17:20:25.7806097Z",
+    "Container": "",
+    "ContainerConfig": {},
+    "DockerVersion": "",
+    "Author": "",
+    "Config": {},
+    "Architecture": "amd64",
+    "Os": "linux",
+    "Size": 154790406,
+    "VirtualSize": 154790406,
+    "RootFS": {
+        "Type": "layers",
+        "Layers": [
+            "sha256:f1b5933fe4b5f49bbe8258745cf396afe07e625bdab3168e364daf7c956b6b81",
             ...
-            &quot;sha256:1d004f8992a331664e12946646decd2ab90178f10ceeb86ab9c1e3a28ecf72f1&quot;
+            "sha256:1d004f8992a331664e12946646decd2ab90178f10ceeb86ab9c1e3a28ecf72f1"
         ]
     },
-    &quot;ManifestType&quot;: &quot;application/vnd.docker.distribution.manifest.v2+json&quot;
+    "ManifestType": "application/vnd.docker.distribution.manifest.v2+json"
 }
 
 OK
@@ -541,22 +540,22 @@ Una vez que tenemos nuestra imagen en el CR podemos ahora desplegar esa imagen e
 cd ../kubernetes
 ```
 
-Abrimos el archivo catalog.yml en una ventana de VSCode o escribimos el comando para abrirlo directamente desde la consola.
+Abrimos el archivo customer.yml en una ventana de VSCode o escribimos el comando para abrirlo directamente desde la consola.
 
 ```bash
 code .
 ```
 
-Una vez con el archivo abierto podemos comenzar a modificar primero la línea **18**, pondremos la liga a nuestra imagen de catalog (recuerden cambiar el `&lt;namespace&gt;` e `&lt;inciales&gt;`).
+Una vez con el archivo abierto podemos comenzar a modificar primero la línea **18**, pondremos la liga a nuestra imagen de customer (recuerden cambiar el `<namespace>` e `<inciales>`).
 
 ```bash
-image: &quot;us.icr.io/&lt;namespace&gt;/customer-&lt;iniciales&gt;:latest&quot;
+image: "us.icr.io/<namespace>/customer-<iniciales>:latest"
 ```
 
-Y en la línea **32** vamos a colocar el nombre del binding con la base de datos de cloudant.
+Y en la línea **32** vamos a colocar el nombre del binding con la base de datos de cloudant. 
 
 ```bash
-secretName: &quot;binding-cloudant-&lt;iniciales&gt;&quot;
+secretName: "binding-cloudant-<iniciales>"
 ```
 
 Para corroborar que nombre le dimos al bining podemos usar el siguiente comando:
@@ -570,7 +569,7 @@ Guardamos el archivo y continuamos con el despliegue de nuestro servicio en Open
 ### 12. Despleguemos en OpenShift - (Terminal 1)
 
 Cuando tengamos el archivo YAML modificado podremos continuar con el despliegue del servicio, es necesario estar en la terminal 1 (dentro del contenedor).
-Primero nos movemos a la carpeta kubenetes, que es la carpeta que contiene nuestro archivo catalog.yml
+Primero nos movemos a la carpeta kubenetes, que es la carpeta que contiene nuestro archivo customer.yml
 
 ```bash
 cd kubernetes
@@ -604,9 +603,9 @@ pod/customer-lightblue-deployment-84ddc845c6-7qgrn   1/1     Running   0        
 pod/mysql-lightblue-deployment-74c7f8c7f8-bd9cp      1/1     Running   0          28h
 
 NAME                                 TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-service/catalog-lightblue-service    NodePort   172.21.237.92   &lt;none&gt;        8081:30113/TCP   28h
-service/customer-lightblue-service   NodePort   172.21.105.2    &lt;none&gt;        8080:30111/TCP   8d
-service/mysql-lightblue-service      NodePort   172.21.69.11    &lt;none&gt;        3306:30007/TCP   28h
+service/catalog-lightblue-service    NodePort   172.21.237.92   <none>        8081:30113/TCP   28h
+service/customer-lightblue-service   NodePort   172.21.105.2    <none>        8080:30111/TCP   8d
+service/mysql-lightblue-service      NodePort   172.21.69.11    <none>        3306:30007/TCP   28h
 
 NAME                                            READY   UP-TO-DATE   AVAILABLE   AGE
 deployment.apps/catalog-lightblue-deployment    1/1     1            1           28h
@@ -620,10 +619,10 @@ replicaset.apps/mysql-lightblue-deployment-74c7f8c7f8      1         1         1
 ```
 
 Tenemos que ver principalmente el estatus de nuestro pod, debe de estar **Running** en caso de no tener el estatus debemos revisar el detalle del pod con el siguiente comando.
-Debemos de editar `&lt;nombre-pod&gt;` el cual se encuentra en la parte de arriba y es el que viene en `pod/&lt;este-es-el-nombre-del-pod&gt;`, no deben de incluir el `pod/`
+Debemos de editar `<nombre-pod>` el cual se encuentra en la parte de arriba y es el que viene en `pod/<este-es-el-nombre-del-pod>`, no deben de incluir el `pod/`
 
 ```bash
-oc describe pod &lt;nombre-pod&gt;
+oc describe pod <nombre-pod>
 ```
 
 El error mas frecuente es `ErrImagePull` el cual nos aparecería de esta manera.
@@ -633,12 +632,12 @@ Events:
   Type     Reason          Age                From               Message
   ----     ------          ----               ----               -------
   Warning  Failed          27s (x2 over 43s)  kubelet            Error: ErrImagePull
-  Normal   BackOff         12s (x2 over 42s)  kubelet            Back-off pulling image &quot;s.icr.io/&lt;namespace&gt;/catalog-&lt;iniciales&gt;&quot;
+  Normal   BackOff         12s (x2 over 42s)  kubelet            Back-off pulling image "s.icr.io/<namespace>/customer-<iniciales>"
   Warning  Failed          12s (x2 over 42s)  kubelet            Error: ImagePullBackOff
-  Normal   Pulling         0s (x3 over 43s)   kubelet            Pulling image &quot;s.icr.io/&lt;namespace&gt;/catalog-&lt;iniciales&gt;&quot;
+  Normal   Pulling         0s (x3 over 43s)   kubelet            Pulling image "s.icr.io/<namespace>/customer-<iniciales>"
 ```
 
-Si este es el error encontrado hay que verificar que solamente editamos la línea **18** y **32** en el YAML y asegurarnos que la URL de nuestra imagen dentro del CR es correcta. En el ejemplo anterior faltó poner una `u` en la URL debería de ser `us.icr.io/&lt;namespace&gt;/catalog-&lt;iniciales&gt;`. Después de corregir nuestro YAML necesitamos correr el siguiente comando.
+Si este es el error encontrado hay que verificar que solamente editamos la línea **18** y **32** en el YAML y asegurarnos que la URL de nuestra imagen dentro del CR es correcta. En el ejemplo anterior faltó poner una `u` en la URL debería de ser `us.icr.io/<namespace>/customer-<iniciales>`. Después de corregir nuestro YAML necesitamos correr el siguiente comando.
 
 ```bash
 oc apply -f customer.yml
@@ -664,21 +663,21 @@ El cual nos arrojará los servicios dentro de nuestro proyecto. Debemos de copia
 
 ```bash
 NAME                         TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-catalog-lightblue-service    NodePort   172.21.237.92   &lt;none&gt;        8081:30113/TCP   28h
-customer-lightblue-service   NodePort   172.21.105.2    &lt;none&gt;        8080:30111/TCP   8d
-mysql-lightblue-service      NodePort   172.21.69.11    &lt;none&gt;        3306:30007/TCP   28h
+catalog-lightblue-service    NodePort   172.21.237.92   <none>        8081:30113/TCP   28h
+customer-lightblue-service   NodePort   172.21.105.2    <none>        8080:30111/TCP   8d
+mysql-lightblue-service      NodePort   172.21.69.11    <none>        3306:30007/TCP   28h
 ```
 
 Ahora correremos el siguiente comando para exponer ese servicio en especifico.
 
 ```bash
-oc expose service &lt;nombre-del-servicio&gt;
+oc expose service <nombre-del-servicio>
 ```
 
 Obtendremos una respuesta como la siguiente.
 
 ```bash
-route.route.openshift.io/&lt;nombre-del-servicio&gt; exposed
+route.route.openshift.io/<nombre-del-servicio> exposed
 ```
 
 Eso nos indica que OpenShift le asignó una ruta a nuestro microservicio y ya es accesible desde afuera del clúster, para saber la URL debemos de poner el siguiente comando.
@@ -691,15 +690,15 @@ Nos arrojará las rutas que tenemos en nuestro proyecto.
 
 ```bash
 NAME                        HOST/PORT                       PATH    SERVICES                    PORT   TERMINATION   WILDCARD
-customer-lightblue-service   &lt;url-de-nuestro-microservicio&gt;         customer-lightblue-service   8081                 None
+customer-lightblue-service   <url-de-nuestro-microservicio>         customer-lightblue-service   8081                 None
 ```
 
 ### 14. Probar nuestro microservicio - (Terminal 2)
 
-Ahora probaremos si nuestro microservicio tiene la conexión a la base de datos de Cloudant, haremos una petición POST que insertará un registro de usuario de ejemplo, para eso necesitamos `&lt;url-de-nuestro-microservicio&gt;` y la vamos a sustituir en el siguiente comando.
+Ahora probaremos si nuestro microservicio tiene la conexión a la base de datos de Cloudant, haremos una petición POST que insertará un registro de usuario de ejemplo, para eso necesitamos `<url-de-nuestro-microservicio>` y la vamos a sustituir en el siguiente comando.
 
 ```bash
-curl  -i -X POST -H &quot;Content-Type: application/json&quot; -H &quot;Accept: application/json&quot; -d &#39;{&quot;username&quot;: &quot;foo&quot;, &quot;password&quot;: &quot;bar&quot;, &quot;firstName&quot;: &quot;foo&quot;, &quot;lastName&quot;: &quot;bar&quot;, &quot;email&quot;: &quot;foo@bar.com&quot;}&#39; &quot;http://&lt;url-de-nuestro-microservicio&gt;:&lt;customer-node-port&gt;/micro/customer&quot;
+curl  -i -X POST -H "Content-Type: application/json" -H "Accept: application/json" -d '{"username": "foo", "password": "bar", "firstName": "foo", "lastName": "bar", "email": "foo@bar.com"}' "http://<url-de-nuestro-microservicio>:<customer-node-port>/micro/customer"
 ```
 
 Con esto estamos haciendo una petición a nuestro microservicio el cual va a insertar un registro en la base de datos y nos confirma con el siguiente mensaje:
@@ -716,28 +715,28 @@ Server: Jetty(9.2.13.v20150730)
 Ahora vamos a realizar una petición a el endpoint para obtener la información insertada de la siguiente manera:
 
 ```bash
-curl &quot;http://&lt;url-de-nuestro-microservicio&gt;:&lt;customer-node-port&gt;/micro/customer/search?username=foo&quot;
+curl "http://<url-de-nuestro-microservicio>:<customer-node-port>/micro/customer/search?username=foo"
 ```
 
 Deberiamos ver un resultado como este:
 
 ```bash
-[{&quot;username&quot;:&quot;foo&quot;,&quot;password&quot;:&quot;bar&quot;,&quot;firstName&quot;:&quot;foo&quot;,&quot;lastName&quot;:&quot;bar&quot;,&quot;email&quot;:&quot;foo@bar.com&quot;,&quot;imageUrl&quot;:null,&quot;customerId&quot;:&quot;1e6db9cf81f74626a0b315fa83a18b5c&quot;}]
+[{"username":"foo","password":"bar","firstName":"foo","lastName":"bar","email":"foo@bar.com","imageUrl":null,"customerId":"1e6db9cf81f74626a0b315fa83a18b5c"}]
 ```
 
 Esto nos indica que nuestro microservicio está funcionando bien y tenemos la conexión a la base de datos.
 
-clea
+
 
 ### 15. Borrar la ruta - (Terminal 1)
 
-Ahora necesitamos borrar la ruta para que el flujo que venga desde afuera del clúster no tenga acceso directo a nuestro microservicio y con eso a nuestra base de datos, por lo tanto, necesitamos correr el siguiente comando. Recuerden sustituir `&lt;nombre-de-la-ruta&gt;` por el nombre real de su ruta.
+Ahora necesitamos borrar la ruta para que el flujo que venga desde afuera del clúster no tenga acceso directo a nuestro microservicio y con eso a nuestra base de datos, por lo tanto, necesitamos correr el siguiente comando. Recuerden sustituir `<nombre-de-la-ruta>` por el nombre real de su ruta.
 
 ```bash
-oc delete route &lt;nombre-de-la-ruta&gt;
+oc delete route <nombre-de-la-ruta>
 ```
 
-Por ejemplo
+Por ejemplo 
 
 ```bash
 oc delete route customer-lightblue-service
