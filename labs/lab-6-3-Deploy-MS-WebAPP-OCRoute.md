@@ -142,21 +142,7 @@ Abrimos el archivo default.json en una ventana de VSCode o escribimos el comando
 code .
 ```
 
-Una vez con el archivo abierto podemos comenzar a modificar primero la línea **18**, pondremos la liga a nuestra imagen de catalog (recuerden cambiar el `&lt;namespace&gt;` e `&lt;inciales&gt;`).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Una vez con el archivo abierto podemos comenzar a modificar primero la línea **18**, pondremos la liga a nuestra imagen de catalog (recuerden cambiar el `<namespace>` e `<iniciales>`).
 
 ### 9. Construir y subir la imagen de Docker - (Terminal 2)
 
@@ -207,7 +193,7 @@ Y deberíamos de poder ver la imagen que acabamos de construir (de no ser el cas
 
 ```bash
 REPOSITORY                                          TAG            IMAGE ID       CREATED         SIZE
-us.icr.io/<namespace>/customer-<iniciales>           latest         a8e46ce7c4ba   2 minutes ago   448MB
+us.icr.io/<namespace>/webapp-<iniciales>           latest         a8e46ce7c4ba   2 minutes ago   448MB
 ```
 
 Una vez que estamos seguros de que mi imagen se construyó correctamente debemos subir la imagen a nuestro CR (Container Registry) por lo tanto corremos el siguiente comando, recordemos modificar los campos de `<namespace>` e `<iniciales>`.
@@ -220,7 +206,7 @@ Debemos recibir el siguiente resultado que nos indica que se subió correctament
 
 ```bash
 Using default tag: latest
-The push refers to repository [us.icr.io/<namespace>/customer-<iniciales>
+The push refers to repository [us.icr.io/<namespace>/webapp-<iniciales>
 1d004f8992a3: Pushed
 b5dd8d049af1: Pushed
 aad17c1cbde0: Pushed
@@ -280,7 +266,7 @@ Con este comando confirmamos que nuestra imagen ya se encuentra en la nube en nu
 Una vez que tenemos nuestra imagen en el CR podemos ahora desplegar esa imagen en OpenShift, para eso necesitamos movernos primero de carpeta y modificar unas líneas de código que tenemos en el YAML.
 
 ```bash
-cd ../kubernetes
+cd /kubernetes
 ```
 
 Abrimos el archivo webapp.yml en una ventana de VSCode o escribimos el comando para abrirlo directamente desde la consola.
@@ -326,25 +312,28 @@ oc get all
 Deberíamos recibir una respuesta como la siguiente.
 
 ```bash
-NAME                                                 READY   STATUS    RESTARTS   AGE
-pod/catalog-lightblue-deployment-bdc9947f6-ftx5n     1/1     Running   0          28h
-pod/customer-lightblue-deployment-84ddc845c6-7qgrn   1/1     Running   0          8d
-pod/mysql-lightblue-deployment-74c7f8c7f8-bd9cp      1/1     Running   0          28h
+pod/catalog-lightblue-deployment-bdc9947f6-ftx5n     1/1     Running   0          3d22h
+pod/customer-lightlue-deployment-7f5b97f566-qq6rc   1/1     Running   0          2d15h
+pod/mysql-lightblue-deployment-74c7f8c7f8-bd9cp      1/1     Running   0          3d23h
+pod/webapp-lightblue-deployment-695d5c7dd9-rgzg8     1/1     Running   0          55s
 
 NAME                                 TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-service/catalog-lightblue-service    NodePort   172.21.237.92   <none>        8081:30113/TCP   28h
-service/customer-lightblue-service   NodePort   172.21.105.2    <none>        8080:30111/TCP   8d
-service/mysql-lightblue-service      NodePort   172.21.69.11    <none>        3306:30007/TCP   28h
+service/catalog-lightblue-service    NodePort   172.21.237.92   <none>        8081:30113/TCP   3d22h
+service/customer-lightblue-service   NodePort   172.21.156.72   <none>        8080:30111/TCP   2d15h
+service/mysql-lightblue-service      NodePort   172.21.69.11    <none>        3306:30007/TCP   3d23h
+service/webapp-lightblue-service     NodePort   172.21.42.48    <none>        8000:30131/TCP   17s
 
 NAME                                            READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/catalog-lightblue-deployment    1/1     1            1           28h
-deployment.apps/customer-lightblue-deployment   1/1     1            1           8d
-deployment.apps/mysql-lightblue-deployment      1/1     1            1           28h
+deployment.apps/catalog-lightblue-deployment    1/1     1            1           3d22h
+deployment.apps/customer-lightblue-deployment   1/1     1            1           2d15h
+deployment.apps/mysql-lightblue-deployment      1/1     1            1           3d23h
+deployment.apps/webapp-lightblue-deployment     1/1     1            1           56s
 
 NAME                                                       DESIRED   CURRENT   READY   AGE
-replicaset.apps/catalog-lightblue-deployment-bdc9947f6     1         1         1       28h
-replicaset.apps/customer-lightblue-deployment-84ddc845c6   1         1         1       8d
-replicaset.apps/mysql-lightblue-deployment-74c7f8c7f8      1         1         1       28h
+replicaset.apps/catalog-lightblue-deployment-bdc9947f6     1         1         1       3d22h
+replicaset.apps/customer-lightblue-deployment-7f5b97f566   1         1         1       2d15h
+replicaset.apps/mysql-lightblue-deployment-74c7f8c7f8      1         1         1       3d23h
+replicaset.apps/webapp-lightblue-deployment-695d5c7dd9     1         1         1       56s
 ```
 
 Tenemos que ver principalmente el estatus de nuestro pod, debe de estar **Running** en caso de no tener el estatus debemos revisar el detalle del pod con el siguiente comando.
@@ -388,16 +377,15 @@ Primero debemos de encontrar el nombre de nuestro servicio y para eso usaremos e
 oc get services
 ```
 
-El cual nos arrojará los servicios dentro de nuestro proyecto. Debemos de copiar el nombre de nuestro servicio de customer `customer-lightblue-service`.
+El cual nos arrojará los servicios dentro de nuestro proyecto. Debemos de copiar el nombre de nuestro servicio de customer `webapp-lightblue-service`.
 
 ```bash
-NAME                         TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-catalog-lightblue-service    NodePort   172.21.237.92   <none>        8081:30113/TCP   28h
-customer-lightblue-service   NodePort   172.21.105.2    <none>        8080:30111/TCP   8d
-mysql-lightblue-service      NodePort   172.21.69.11    <none>        3306:30007/TCP   28h
+NAME                                 TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+service/catalog-lightblue-service    NodePort   172.21.237.92   <none>        8081:30113/TCP   3d22h
+service/customer-lightblue-service   NodePort   172.21.156.72   <none>        8080:30111/TCP   2d15h
+service/mysql-lightblue-service      NodePort   172.21.69.11    <none>        3306:30007/TCP   3d23h
+service/webapp-lightblue-service     NodePort   172.21.42.48    <none>        8000:30131/TCP   17sAhora correremos el siguiente comando para exponer ese servicio en especifico.
 ```
-
-Ahora correremos el siguiente comando para exponer ese servicio en especifico.
 
 ```bash
 oc expose service <nombre-del-servicio>
@@ -426,30 +414,42 @@ webapp-lightblue-service   <url-de-nuestro-microservicio>         customer-light
 
 Ahora probaremos si nuestro microservicio tiene la conexión a la base de datos de Cloudant, haremos una petición POST que insertará un registro de usuario de ejemplo, para eso necesitamos `<url-de-nuestro-microservicio>` y la vamos a sustituir en el siguiente comando.
 
+### 15. CLEAN UP (Preparación para el siguiente Lab) - (Terminal 1)
 
-
-
-
-
-
-
-
-
-
-### 15. Borrar la ruta - (Terminal 1)
-
-Ahora necesitamos borrar la ruta para que el flujo que venga desde afuera del clúster no tenga acceso directo a nuestro microservicio y con eso a nuestra base de datos, por lo tanto, necesitamos correr el siguiente comando. Recuerden sustituir `<nombre-de-la-ruta>` por el nombre real de su ruta.
+Debemos eliminar los pods de `customer`, `catalog` y `webapp` de nuestro cluster: (Hay que conservar unicamente lo correspondiente a `mysql`)
 
 ```bash
-oc delete route <nombre-de-la-ruta>
+oc delete deployment customer-lightblue-deployment
+oc delete service customer-lightblue-service
 ```
 
-Por ejemplo 
+```bash
+oc delete deployment catalog-lightblue-deployment
+oc delete service catalog-lightblue-service
+```
+
+```bash
+oc delete deployment webapp-lightblue-deployment
+oc delete service webapp-lightblue-service 
+```
+
+Lo mismo con las imagenes del container registry (únicamente de `customer`, `catalog` y `webapp`)
+
+```bash
+ibmcloud cr image-rm us.icr.io/<namespace>/catalog-<iniciales>:latest
+```
+
+```bash
+ibmcloud cr image-rm us.icr.io/<namespace>/customer-<iniciales>:latest
+```
+
+```bash
+ibmcloud cr image-rm us.icr.io/<namespace>/webapp-<iniciales>:latest
+```
+
+Ahora necesitamos borrar las rutas que expusimos, tanto (únicamente de `customer` y `catalog`) Muy importante conservar únicamente la de `webapp`.
 
 ```bash
 oc delete route customer-lightblue-service
+oc delete route catalog-lightblue-service
 ```
-
-De esta manera estaríamos borrando la ruta por lo tanto si intentamos volver a pedir información con el `curl` de arriba nos arrojaría que no existe la URL.
-
-Con esto terminamos el primer laboratorio.

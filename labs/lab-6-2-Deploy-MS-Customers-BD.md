@@ -726,8 +726,6 @@ Deberiamos ver un resultado como este:
 
 Esto nos indica que nuestro microservicio está funcionando bien y tenemos la conexión a la base de datos.
 
-
-
 ### 15. Borrar la ruta - (Terminal 1)
 
 Ahora necesitamos borrar la ruta para que el flujo que venga desde afuera del clúster no tenga acceso directo a nuestro microservicio y con eso a nuestra base de datos, por lo tanto, necesitamos correr el siguiente comando. Recuerden sustituir `<nombre-de-la-ruta>` por el nombre real de su ruta.
