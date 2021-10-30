@@ -28,7 +28,7 @@ Estas son las herramientas que puedes instalar localmente en tu computadora en c
 | 3  | [Intro a Imagen del Bootcamp](https://github.com/joeg1307/bootcamp/blob/main/labs/lab-3-Intro-Imagen-Bootcamp.md)  |
 | 4  | [Intro a consola Openshift](https://github.com/joeg1307/bootcamp/blob/main/labs/lab-4-Intro-Consola-Openshift.md)  |
 | 5  | [Lab hola mundo en Openshift ](https://github.com/joeg1307/bootcamp/blob/main/labs/lab-5-HolaMundo-Openshift.md)  |
-| 6.0  | [Intro al Laboratorio ](https://github.com/joeg1307/bootcamp/blob/main/labs/lab-6-0-Intro-al-lab.md)  |
+| 6.0  | [Intro al Laboratorio ](https://ibm.box.com/s/ufsqnuu4govjgor66jsxiphml6euutu5)  |
 | 6.1  | [Parte 1 Deploy MS Productos+ BD ](https://github.com/joeg1307/bootcamp/blob/main/labs/lab-6-1-Deploy-MS-Productos-BD.md)  |
 | 6.2  | [Parte 2 Deploy MS Customers+BD ](https://github.com/joeg1307/bootcamp/blob/main/labs/lab-6-2-Deploy-MS-Customers-BD.md)  |
 | 6.3  | [Parte 3 Deploy MS WebAPP+ OC Route (Teardown)](https://github.com/joeg1307/bootcamp/blob/main/labs/lab-6-3-Deploy-MS-WebAPP-OCRoute.md)  |
