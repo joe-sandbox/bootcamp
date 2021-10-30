@@ -76,10 +76,6 @@ oc login --token=<token> --server=<server>
 
 ​
 
-​
-
-​
-
 ### 3. Configurar login del CR en Docker - (Terminal 2)
 
 Antes de ejecutar el comando asegurate de abrir una nueva terminal de shell en tu computadora.
@@ -95,8 +91,6 @@ WARNING! Using --password via the CLI is insecure. Use --password-stdin.
 
 Login Succeeded
 ```
-
-​
 
 ​
 
@@ -125,8 +119,6 @@ cd mybootcamp
 
 cd LightBlueCompute
 ```
-
-​
 
 ​
 
@@ -199,8 +191,6 @@ Last Operation:
 ```
 
 Despues de obtener ese resultado basicamente tendríamos creada nuestra instancia de Cloudant en la nube.
-
-​
 
 ​
 
@@ -340,6 +330,8 @@ Para verificar que hemos hecho el binding correctamente a nuestro cluster correr
 oc get secrets
 ```
 
+​
+
 ### 7. Movernos de carpeta - (Terminal 1 y Terminal 2)
 
 A continuación vamos a desplegar el siguiente micro-servicio, por lo que nos moveremos a su respectivo directorio: `customer` con el siguiente comando (Ambas terminales deben estar en el mismo directorio).
@@ -347,6 +339,8 @@ A continuación vamos a desplegar el siguiente micro-servicio, por lo que nos mo
 ```bash
 cd ../../customer
 ```
+
+​
 
 ### 8. Construir el Microservicio - (Terminal 1)
 
@@ -414,6 +408,8 @@ BUILD SUCCESSFUL
 
 Total time: 10.017 secs
 ```
+
+​
 
 ### 9. Construir y subir la imagen de Docker - (Terminal 2)
 
@@ -488,6 +484,8 @@ f1b5933fe4b5: Pushed
 latest: digest: sha256:cee5d20c9ca894d353d19c156d5774a39c4af4235316fb1346bd2dc869694c32 size: 1789
 ```
 
+​
+
 ### 10. Imagen subida a CR - (Terminal 1)
 
 Corroboremos que la imagen se subió correctamente a nuestro Container Registry.
@@ -532,6 +530,8 @@ OK
 
 Con este comando confirmamos que nuestra imagen ya se encuentra en la nube en nuestra instancia de CR.
 
+​
+
 ### 11. Modifiquemos el YAML - (Terminal 2)
 
 Una vez que tenemos nuestra imagen en el CR podemos ahora desplegar esa imagen en OpenShift, para eso necesitamos movernos primero de carpeta y modificar unas líneas de código que tenemos en el YAML.
@@ -565,6 +565,8 @@ oc get secrets
 ```
 
 Guardamos el archivo y continuamos con el despliegue de nuestro servicio en OpenShift
+
+​
 
 ### 12. Despleguemos en OpenShift - (Terminal 1)
 
@@ -649,6 +651,8 @@ Con este comando reconfiguramos nuestro despliegue y automáticamente trata de c
 oc get all
 ```
 
+​
+
 ### 13. Exponer el microservicio con una ruta - (Terminal 1)
 
 Ahora que tenemos nuestro microservicio desplegado en OpenShift necesitamos exponerlo para hacer una prueba y verificar que está funcionando correctamente.
@@ -693,6 +697,8 @@ NAME                        HOST/PORT                       PATH    SERVICES    
 customer-lightblue-service   <url-de-nuestro-microservicio>         customer-lightblue-service   8081                 None
 ```
 
+​
+
 ### 14. Probar nuestro microservicio - (Terminal 2)
 
 Ahora probaremos si nuestro microservicio tiene la conexión a la base de datos de Cloudant, haremos una petición POST que insertará un registro de usuario de ejemplo, para eso necesitamos `<url-de-nuestro-microservicio>` y la vamos a sustituir en el siguiente comando.
@@ -725,6 +731,8 @@ Deberiamos ver un resultado como este:
 ```
 
 Esto nos indica que nuestro microservicio está funcionando bien y tenemos la conexión a la base de datos.
+
+​
 
 ### 15. Borrar la ruta - (Terminal 1)
 
