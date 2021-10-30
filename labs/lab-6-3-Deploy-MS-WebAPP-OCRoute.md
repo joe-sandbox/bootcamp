@@ -418,11 +418,13 @@ Ahora probaremos si nuestro microservicio tiene la conexión a la base de datos 
 
 ​
 
-### 12. CLEAN UP (Preparación para el siguiente Lab) - (Terminal 1)
+## 12. CLEAN UP (Preparación para el siguiente Lab) - (Terminal 1)
 
 ## Video a seguir
 
 [Link a video](https://ibm.box.com/s/x7obos3evh1tx192p37whnm7hrqmdrb9)
+
+​
 
 Debemos eliminar los pods de `customer`, `catalog` y `webapp` de nuestro cluster: (Hay que conservar unicamente lo correspondiente a `mysql`)
 
