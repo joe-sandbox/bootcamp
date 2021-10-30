@@ -426,7 +426,7 @@ Ahora probaremos si nuestro microservicio tiene la conexión a la base de datos 
 
 ​
 
-Debemos eliminar los pods de `customer`, `catalog` y `webapp` de nuestro cluster: (Hay que conservar unicamente lo correspondiente a `mysql`)
+Debemos eliminar los pods de `customer`, `catalog` y `webapp` de nuestro cluster: (Hay que conservar únicamente lo correspondiente a `mysql`)
 
 ```bash
 oc delete deployment customer-lightblue-deployment
@@ -443,7 +443,7 @@ oc delete deployment webapp-lightblue-deployment
 oc delete service webapp-lightblue-service 
 ```
 
-Lo mismo con las imagenes del container registry (únicamente de `customer`, `catalog` y `webapp`)
+Lo mismo con las imágenes del container registry (únicamente de `customer`, `catalog` y `webapp`)
 
 ```bash
 ibmcloud cr image-rm us.icr.io/<namespace>/catalog-<iniciales>:latest
@@ -457,7 +457,7 @@ ibmcloud cr image-rm us.icr.io/<namespace>/customer-<iniciales>:latest
 ibmcloud cr image-rm us.icr.io/<namespace>/webapp-<iniciales>:latest
 ```
 
-Ahora necesitamos borrar las rutas que expusimos, tanto (únicamente de `customer` y `catalog`) Muy importante conservar únicamente la de `webapp`.
+Ahora necesitamos borrar las rutas que expusimos, tanto (únicamente de `customer` y `catalog`). Muy importante conservar únicamente la de `webapp`.
 
 ```bash
 oc delete route customer-lightblue-service
