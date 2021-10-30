@@ -22,7 +22,7 @@ En este laboratorio aprenderas y desplegaras un Microservicio en Openshift unien
 
 ## Video a seguir
 
-[Link a video](https://ibm.ent.box.com/file/869503443926)
+[Link a video](https://ibm.box.com/s/oghln0zl6owx64c1awh6ceqnjt6dtjba)
 
 ## Pasos a seguir
 
