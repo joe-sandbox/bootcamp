@@ -1,4 +1,4 @@
-# Lab 2 - Despliegue del Microservicio de Customer y creación de Base de Datos
+# Lab 3 - Despliegue del Microservicio Web
 
 ## Lo que aprenderas de este lab:
 
@@ -22,7 +22,7 @@ En este laboratorio aprenderas y desplegaras un Microservicio en Openshift unien
 
 ## Video a seguir
 
-[Link a video](https://ibm.ent.box.com/file/869503443926)
+[Link a video](https://ibm.box.com/s/mp1m1rub0wh4jlk2hbu9rej9qklsdgt1)
 
 ## Pasos a seguir
 
@@ -57,7 +57,6 @@ Utilizaremos el grupo de recursos que diga `default` o `Default`.
 ```bash
 ibmcloud target -g default
 ```
-
 ​
 
 ### 2. Configurar login de openshift - (Terminal 1)
@@ -76,10 +75,6 @@ oc login --token=<token> --server=<server>
 
 ​
 
-​
-
-​
-
 ### 3. Configurar login del CR en Docker - (Terminal 2)
 
 Antes de ejecutar el comando asegurate de abrir una nueva terminal de shell en tu computadora.
@@ -95,8 +90,6 @@ WARNING! Using --password via the CLI is insecure. Use --password-stdin.
 
 Login Succeeded
 ```
-
-​
 
 ​
 
@@ -144,7 +137,9 @@ code .
 
 Una vez con el archivo abierto podemos comenzar a modificar primero la línea **18**, pondremos la liga a nuestra imagen de catalog (recuerden cambiar el `<namespace>` e `<iniciales>`).
 
-### 9. Construir y subir la imagen de Docker - (Terminal 2)
+​
+
+### 6. Construir y subir la imagen de Docker - (Terminal 2)
 
 Para construir la imagen de docker debemos movernos de carpeta con el siguiente comando.
 
@@ -180,7 +175,7 @@ El resultado que debemos obtener es el siguiente (pueden variar varias líneas p
  => exporting to image                                                                                0.6s 
  => => exporting layers                                                                               0.6s 
  => => writing image sha256:675b9d9e2ace157faff5ebafb3effa65de62a529634bf208f40846279d2aa8f2          0.0s 
- => => naming to us.icr.io/cnb-bootcamp/customer-alma                                                 0.0s 
+ => => naming to us.icr.io/cnb-bootcamp/webapp-alma                                                 0.0s 
 
 Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
 ```
@@ -216,8 +211,9 @@ edd61588d126: Pushed
 f1b5933fe4b5: Pushed
 latest: digest: sha256:cee5d20c9ca894d353d19c156d5774a39c4af4235316fb1346bd2dc869694c32 size: 1789
 ```
+​
 
-### 10. Imagen subida a CR - (Terminal 1)
+### 7. Imagen subida a CR - (Terminal 1)
 
 Corroboremos que la imagen se subió correctamente a nuestro Container Registry.
 Debemos modificar el `<namespace>` y ponerle nuestras iniciales a nuestro repo `<iniciales>` y no olvidemos incluir el punto del final.
@@ -260,8 +256,9 @@ OK
 ```
 
 Con este comando confirmamos que nuestra imagen ya se encuentra en la nube en nuestra instancia de CR.
+​
 
-### 11. Modifiquemos el YAML - (Terminal 2)
+### 8. Modifiquemos el YAML - (Terminal 2)
 
 Una vez que tenemos nuestra imagen en el CR podemos ahora desplegar esa imagen en OpenShift, para eso necesitamos movernos primero de carpeta y modificar unas líneas de código que tenemos en el YAML.
 
@@ -280,8 +277,9 @@ Una vez con el archivo abierto podemos comenzar a modificar primero la línea **
 ```bash
 image: "us.icr.io/<namespace>/webapp-<iniciales>:latest"
 ```
+​
 
-### 12. Despleguemos en OpenShift - (Terminal 1)
+### 9. Despleguemos en OpenShift - (Terminal 1)
 
 Cuando tengamos el archivo YAML modificado podremos continuar con el despliegue del servicio, es necesario estar en la terminal 1 (dentro del contenedor).
 Primero nos movemos a la carpeta kubenetes, que es la carpeta que contiene nuestro archivo webapp.yml
@@ -366,8 +364,9 @@ Con este comando reconfiguramos nuestro despliegue y automáticamente trata de c
 ```bash
 oc get all
 ```
+​
 
-### 13. Exponer el microservicio con una ruta - (Terminal 1)
+### 10. Exponer el microservicio con una ruta - (Terminal 1)
 
 Ahora que tenemos nuestro microservicio desplegado en OpenShift necesitamos exponerlo para hacer una prueba y verificar que está funcionando correctamente.
 **Con el siguiente comando permitimos el trafico de afuera del clúster a nuestro microservicio** por lo tanto será necesario que después de hacer la prueba borremos la ruta para que de nuevo solo sea accesible dentro del clúster. 
@@ -377,7 +376,7 @@ Primero debemos de encontrar el nombre de nuestro servicio y para eso usaremos e
 oc get services
 ```
 
-El cual nos arrojará los servicios dentro de nuestro proyecto. Debemos de copiar el nombre de nuestro servicio de customer `webapp-lightblue-service`.
+El cual nos arrojará los servicios dentro de nuestro proyecto. Debemos de copiar el nombre de nuestro servicio web `webapp-lightblue-service`.
 
 ```bash
 NAME                                 TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
@@ -407,14 +406,23 @@ Nos arrojará las rutas que tenemos en nuestro proyecto.
 
 ```bash
 NAME                        HOST/PORT                       PATH    SERVICES                    PORT   TERMINATION   WILDCARD
-webapp-lightblue-service   <url-de-nuestro-microservicio>         customer-lightblue-service   8081                 None
+webapp-lightblue-service   <url-de-nuestro-microservicio>         webapp-lightblue-service   8081                 None
 ```
+​
 
-### 14. Probar nuestro microservicio - (Terminal 2)
+### 11. Probar nuestro microservicio - (Terminal 2)
 
 Ahora probaremos si nuestro microservicio tiene la conexión a la base de datos de Cloudant, haremos una petición POST que insertará un registro de usuario de ejemplo, para eso necesitamos `<url-de-nuestro-microservicio>` y la vamos a sustituir en el siguiente comando.
 
-### 15. CLEAN UP (Preparación para el siguiente Lab) - (Terminal 1)
+​
+
+​
+
+### 12. CLEAN UP (Preparación para el siguiente Lab) - (Terminal 1)
+
+## Video a seguir
+
+[Link a video](https://ibm.box.com/s/x7obos3evh1tx192p37whnm7hrqmdrb9)
 
 Debemos eliminar los pods de `customer`, `catalog` y `webapp` de nuestro cluster: (Hay que conservar unicamente lo correspondiente a `mysql`)
 
