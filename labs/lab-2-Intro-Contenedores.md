@@ -67,6 +67,10 @@ docker rund -d couchdb:2
 Observarás que la imagen se descargará automáticamente con el caso anterior. Además verás la bandera `-d` que sirve para ejcutar en segundo plano el contenedor. 
 En cuanto al `:2`sirve para etiquetar que version del contenedor queremos ejecutar. 
 
+**NOTA**: En caso que muestre el error `no matching manifest for windows/amd64 
+        in the manifest list entries` sigue estas [instrucciones](https://stackoverflow.com/a/57548944) como posible resolución del error.
+        
+        
 7. Para revisar si el contenedor sigue corriendo docker nos ofrece el siguiente comando:
 ```bash
 docker ps
