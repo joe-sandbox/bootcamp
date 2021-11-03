@@ -41,10 +41,10 @@ docker start -i cnbtools
 
 ### 1. Configura la terminal de IBM Cloud CLI
 
-Antes de ejecutar el comando asegurate de cambiar los valores `&lt;usuario&gt;`y `&lt;password&gt;`por tu usuario y contraseña de IBM Cloud.
+Antes de ejecutar el comando asegurate de cambiar los valores `<usuario>`y `<password>`por tu usuario y contraseña de IBM Cloud.
 
 ```bash
-ibmcloud login -u &lt;usuario&gt; -p &lt;password&gt; -r us-south
+ibmcloud login -u <usuario> -p <password> -r us-south
 ```
 
 Correremos el siguiente comando para saber a que grupo de recursos nos dirigiremos.
@@ -66,13 +66,13 @@ ibmcloud target -g default
 Antes de ejecutar el comando asegurate obtener el token desde la interfaz de usuario de openshift.
 
 ```bash
-oc login --token=&lt;token&gt; --server=&lt;server&gt;
+oc login --token=<token> --server=<server>
 ```
 
 Nos movemos a nuestro proyecto.
 
 ```bash
-oc login --token=&lt;token&gt; --server=&lt;server&gt;
+oc login --token=<token> --server=<server>
 ```
 
 ​
@@ -92,7 +92,7 @@ NAME                                              READY   STATUS    RESTARTS   A
 pod/mysql-lightblue-deployment-74c7f8c7f8-bd9cp   1/1     Running   0          12d
 
 NAME                              TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
-service/mysql-lightblue-service   NodePort   172.21.69.11   &lt;none&gt;        3306:30007/TCP   12d
+service/mysql-lightblue-service   NodePort   172.21.69.11   <none>        3306:30007/TCP   12d
 
 NAME                                         READY   UP-TO-DATE   AVAILABLE   AGE
 deployment.apps/mysql-lightblue-deployment   1/1     1            1           12d
@@ -102,7 +102,7 @@ replicaset.apps/mysql-lightblue-deployment-74c7f8c7f8   1         1         1   
 
 NAME                                                HOST/PORT                                                                                                                     PATH   SERVICES                   PORT   TERMINATION   WILDCARD
 route.route.openshift.io/webapp-lightblue-service   webapp-lightblue-service-bootcamp-ana.garage-apps-5c5540dc84399e3b5dd482adf70d013d-0000.us-south.containers.appdomain.cloud          webapp-lightblue-service   8000                 NoneTenemos que ver principalmente el estatus de nuestro pod, debe de estar **Running** en caso de no tener el estatus debemos revisar el detalle del pod con el siguiente comando.
-Debemos de editar `&lt;nombre-pod&gt;` el cual se encuentra en la parte de arriba y es el que viene en `pod/&lt;este-es-el-nombre-del-pod&gt;`, no deben de incluir el `pod/`
+Debemos de editar `<nombre-pod>` el cual se encuentra en la parte de arriba y es el que viene en `pod/<este-es-el-nombre-del-pod>`, no deben de incluir el `pod/`
 ```
 
 ## 4. Creación del toolchain
@@ -124,10 +124,10 @@ pod/mysql-lightblue-deployment-74c7f8c7f8-bd9cp      1/1     Running   0        
 pod/webapp-lightblue-deployment-695d5c7dd9-rgzg8     1/1     Running   0          55s
 
 NAME                                 TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-service/catalog-lightblue-service    NodePort   172.21.237.92   &lt;none&gt;        8081:30113/TCP   3d22h
-service/customer-lightblue-service   NodePort   172.21.156.72   &lt;none&gt;        8080:30111/TCP   2d15h
-service/mysql-lightblue-service      NodePort   172.21.69.11    &lt;none&gt;        3306:30007/TCP   3d23h
-service/webapp-lightblue-service     NodePort   172.21.42.48    &lt;none&gt;        8000:30131/TCP   17s
+service/catalog-lightblue-service    NodePort   172.21.237.92   <none>        8081:30113/TCP   3d22h
+service/customer-lightblue-service   NodePort   172.21.156.72   <none>        8080:30111/TCP   2d15h
+service/mysql-lightblue-service      NodePort   172.21.69.11    <none>        3306:30007/TCP   3d23h
+service/webapp-lightblue-service     NodePort   172.21.42.48    <none>        8000:30131/TCP   17s
 
 NAME                                            READY   UP-TO-DATE   AVAILABLE   AGE
 deployment.apps/catalog-lightblue-deployment    1/1     1            1           3d22h
@@ -143,10 +143,10 @@ replicaset.apps/webapp-lightblue-deployment-695d5c7dd9     1         1         1
 ```
 
 Tenemos que ver principalmente el estatus de nuestro pod, debe de estar **Running** en caso de no tener el estatus debemos revisar el detalle del pod con el siguiente comando.
-Debemos de editar `&lt;nombre-pod&gt;` el cual se encuentra en la parte de arriba y es el que viene en `pod/&lt;este-es-el-nombre-del-pod&gt;`, no deben de incluir el `pod/`
+Debemos de editar `<nombre-pod>` el cual se encuentra en la parte de arriba y es el que viene en `pod/<este-es-el-nombre-del-pod>`, no deben de incluir el `pod/`
 
 ```bash
-oc describe pod &lt;nombre-pod&gt;
+oc describe pod <nombre-pod>
 ```
 
 ## 5. Edición del archivo en Eclipse Orion IDE
@@ -168,7 +168,7 @@ Nos arrojará las rutas que tenemos en nuestro proyecto.
 ```bash
 NAME                                                                TYPE                                  DATA   AGE
 all-icr-io                                                          kubernetes.io/dockerconfigjson        1      19d
-binding-cloudantdb-&lt;inciales&gt;                                       Opaque                                11     7d20h
+binding-cloudantdb-<inciales>                                       Opaque                                11     7d20h
 ...​
 ```
 
@@ -184,7 +184,7 @@ Nos arrojará las rutas que tenemos en nuestro proyecto.
 
 ```bash
 NAME                        HOST/PORT                       PATH    SERVICES                    PORT   TERMINATION   WILDCARD
-webapp-lightblue-service   &lt;url-de-nuestro-microservicio&gt;         webapp-lightblue-service   8081                 None
+webapp-lightblue-service    <url-de-nuestro-microservicio>         webapp-lightblue-service   8081                 None
 ```
 
 ​
