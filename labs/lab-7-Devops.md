@@ -23,7 +23,7 @@ En este laboratorio aprenderas y desplegaras 3 de los microservicios de Light Bl
 
 ## Video a seguir
 
-[Link a video](https://ibm.box.com/s/mp1m1rub0wh4jlk2hbu9rej9qklsdgt1)
+[Link a video](https://ibm.box.com/s/m9poyvaugalp7lfs18ilt7jtxrei11nz)
 
 ##
 
