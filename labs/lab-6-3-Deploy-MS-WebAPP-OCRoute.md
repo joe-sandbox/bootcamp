@@ -2,7 +2,7 @@
 
 ## Lo que aprenderas de este lab:
 
-En este laboratorio aprenderas y desplegaras un Microservicio en Openshift uniendolo a un servicio de base de datos NoSQL llamado Cloudant.
+En este laboratorio aprenderas y desplegaras el Microservicio de web app en Openshift.
 
 ## Lo que necesitarás
 
